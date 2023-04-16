@@ -1,0 +1,23 @@
+port name: usbserial-0232C119
+path to microchip: /Applications/microchip/xc32/v4.21
+
+serial monitor command: screen /dev/tty.usbserial-0232C119 230400
+    to exit: ctrl-a k y
+
+to compile manually:
+
+    compile command:
+    /Applications/microchip/xc32/v4.21/bin/xc32-gcc -mprocessor=32MX170F256B -o {FILENAME}.elf -Wl,--script=skeleton/NU32DIPbootloaded.ld {FILENAME}.c
+
+    convert to hex file command:
+    /Applications/microchip/xc32/v4.21/bin/xc32-bin2hex {FILENAME}.elf
+
+    upload command:
+    /Users/cole/code/MECHE-333/01_Quickstart_nu32dip/nu32utility /dev/tty.usbserial-0232C119 {FILENAME}.hex
+
+MAKE commands
+    compile: make
+    upload: make write
+    serial monitor: make screen
+    clean: make clean
+

@@ -1,0 +1,46 @@
+18-19, 21-22, 27-28, 30-32, 34-35
+
+18: Preprocessor: text file of c code,
+    Complier: assembly code
+    Assembler: object code
+    linker: executable code
+
+19: main returns an int which signifies the program ran successfully
+
+21: a) 140 b) 4 c) 24
+
+22: a) 0.0 
+    b) 0.666667 
+    c) 0.0 
+    d) 3 
+    e) 3 
+    f) 3.0
+
+27) When debugging a large program I like to first put a bunch of print statements
+    in the code that print out different variables at different points in the program
+    to track down where the problem is. Once the problem is narrowed down to a small
+    peice of code it is easier to find what is wrong. 
+
+28) see invest.c
+
+30) a) 3
+    b) 4
+    c) 2
+    d) 6
+    e) error
+    f) unknown
+    g) 2
+
+31) i = 5
+
+32) a) 0xf2
+    b) 0x01
+    c) 0x0f
+    d) 0x0e
+    e) 0x68
+    f) 0x01
+    g) 0x01
+
+34) see ascii.c
+
+35)

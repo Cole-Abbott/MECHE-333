@@ -1,0 +1,85 @@
+CHAPTER 5
+: a) long long int division, all float and double operations
+float division:
+
+    f3 = f1/f2;
+    9d008718:	8fc50034 	lw	a1,52(s8)
+    9d00871c:	8fc40030 	lw	a0,48(s8)
+    9d008720:	0f402343 	jal	9d008d0c <__divsf3>
+    9d008724:	00000000 	nop
+    9d008728:	afc20058 	sw	v0,88(s8)
+
+
+    9d008d0c <__divsf3>:
+    9d008d0c:	3c0b8000 000445c2 310800ff 000555c2     ...<.E.....1.U..
+    9d008d1c:	314a00ff 00043a00 00eb3825 00054a00     ..J1.:..%8...J..
+    9d008d2c:	012b4825 00857026 016e5824 250effff     %H+.&p..$Xn....%
+    9d008d3c:	2dc100fe 1020003f 00000000              ...-?. .....
+
+b) the shortest operations are int addition, subtraction, and multiplication
+    the char opperations have and extra andi instruction which ands the result with 0xff 
+    before storing. this is done to ensure that the result, which is a 32 bit number, 
+    is in the range of 0 to 255 before storing it in a char variable.
+
+c) 
+    char        int     long long   float   double
++   5(1.25)     4(1)    11(2.75)    j       j
+-   5(1.25)     4(1)    11(2.75)    j       j
+*   5(1.25)     4(1)    18(4.5)     j       j
+/   7(1.75)     7(1.75) j           j       j
+
+d) the math subrutines for float and double are at the 
+    end of the program memory after the regular program. 
+    these each only take a few lines of memory, the long long division 
+    is stored at the begining of the memory before the program and is 200 lines long
+
+4: and, 4 instructions, or, 4 instruction, shift left, 3 instructions, shift right 3 instructions
+
+CHAPTER 6:
+
+1: while the microcontroller is polling, it is stuck in a loop and cannot do other calculations, 
+with interupts, the microcontroller can run other code, and pauses it when the interupt happens and resumes
+where it left off once finished with the interupt. 
+
+4:  a) the CPU will stop normal execution and execute the IRQ then go back
+    b) the CPU will stop and and execute the new IRQ then go back
+    c) the CPU will stop and and execute the new IRQ then go back
+    d) the CPU will finish the level 6 IRQ, then exute the level 4 IRQ
+
+5:  the cpu must save the data from its registers into ram before executing the ISR, and 
+    apon compleating the ISR is must load the data back into its registers
+    if a shadow register is set, the cpu does not have to do this because it can use the shadow registers 
+    instead of the normal registers while executing the ISR
+
+8: a)   IEC0SET = 0b100000000; //set the timer2 enable bit
+        IFS0CLR = 0b100000000; //clear the timer2 flag
+        IPC2CLR = 0b1001; //set bits 4:2 of IPC2 to 101 and bits 1:0 to 10
+        IPC2SET = 0b10110; 
+
+    b)  IEC1SET = 0b1000000000000000; //set RTCC enable bit
+        IFS1CLR = 0b1000000000000000; //clear RTCC flag
+        IPC8SET = 0b1111100000000000000000000000; //set IPC8 28:26 to 111 and 25:24 to 11
+
+    c) 
+
+9:
+//rising edge mode
+INTCONbits.INT0EP = 1;
+INTCONbits.INT1EP = 1;
+
+//set priority and sub priority
+IPC0bits.INT0IP = 6;
+IPC0bits.INT1IP = 6;
+IPC0bits.INT0IS = 0;
+IPC0bits.INT1IS = 0;
+
+IPC0bits.INT0IF = 0; //clear interrupt flag 
+IPC0bits.INT0IE = 1; //enable interrupt
+
+IPC0bits.INT1IF = 0; //clear interrupt flag 
+IPC0bits.INT1IE = 1; //enable interrupt
+
+
+16: see INT_ext_int.calculations
+
+17: see main.c

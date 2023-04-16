@@ -1,0 +1,52 @@
+3:  Port B: 0-15
+    Port C: 12-15, 
+    Port D: 0-11
+    Port E: 0-7
+    Port F: 0-1, 3-5
+
+    bit 0: pin 60
+
+intcon 
+    bit 16: SS0
+    bit 12: MVEC
+    bit 8-10: TPC
+    bit 4: INT4EP
+    bit 3: INT3EP
+    bit 2: INT2EP
+    bit 1: INT1EP
+    bit 0: INT0EP
+
+
+4:  LATBbits.LATB4 = 1;
+
+5: see simplePIC.C
+
+7: the .o file contains extra functions from librarys used in the program. 
+   before converting to the hex file the extra unsed functions are removed.
+
+9:  TRISDSET = 0b1100
+    TRISDCLR = b0100010
+    TRISDINV = 0b10001
+
+
+1: the functions NU32DIP_Startup, NU32DIP_ReadUART1, NU32DIP_WriteUART1 and
+the constants NU32DIP_DESIRED_BAUD, NU32DIP_GREEN, NU32DIP_YELLOW, NU32DIP_USER, NU32DIP_SYS_FREQ
+are public
+
+2: a) see invest.c
+
+   b) see mainB.c, helper.c, helper.h
+        in main.c: main function, includes helper.h, nu32dip.h
+        in helper.c: helper functions, includes helper.h, nu32dip.h, stdio.h
+        in helper.h: function prototypes for getUserInput, calculateGrowth, and sendOutput
+            definition of struct investment
+        helper.h contains prototypes of functions used in main.c and 
+        defintions of structs used in main.c and helper.c
+
+   c) see mainC.c, invest.h, io.c, io.h, calculate.c, calculate.h
+        main.c: main routine, includes io.h, calculate.h
+        io.c, io.h: contains functions for input and output, includes invest.h
+        calculate.c, calculate.h: contains functions for calculating growth, includes invest.h
+        invest.h: contains investment struct used in all files,
+            this is needed because io.c and calculate.c need to know the definition of the struct
+            but it can't be defined in io.c and calculate.c because then it will have multiple definitions

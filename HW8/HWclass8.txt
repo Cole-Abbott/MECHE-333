@@ -1,0 +1,71 @@
+3: pin 12 is not 5v tolerent and has the following functions
+AN4: analog input 
+C1IN: comparator input 
+CN6: change notification input
+RB4: digital input/output
+
+4: you would modify the TRISC register to change the direction of the pin.
+
+5: 0x000000C3
+
+6: SYSCLK is the clock signal that powers the cpu, ram and other features of the chip
+that require high speeds
+
+PBCLK is the clock signal that powers the peripherals of the chip, it is lower speed
+and runs analog io, pwm, I2C, SPI and other peripherals
+
+PORTA to PORTG are digital io pins 
+
+Timer1 to Timer5 are 16 bit counters that can be used for timing and counting internal or 
+external events. 
+
+10-bit ADC is a 10 bit analog to digital converter that can be used to 
+read analog signals between 0 and 3.3v with 10 bit resolution.
+
+PWM OC1-5: 5 PWM outputs that can be used to generate a square wave signal 
+with a variable duty cycle
+
+Data RAM is where temporary data is stored while the program is running, such as variables
+
+Program flash memory is where the program is stored
+ 
+prefetch catch modual is a small memory that stores the next instructions
+to be executed so the cpu is not limited by the speed of the program memory
+
+7: PORTA-G, USB CAN1-2, Ethernet, DMAC, ICD
+
+8: 3.3 / 2^10 = 0.00322v = 3.22mv
+
+9: 16 catch lanes * 16 bytes per lane = 256 bytes
+
+10: 128 bits of cache allows the prefetch modual to fetch instructions fast enough 
+to keep the cpu busy, any less the cpu would have to wait for instructions from the 
+program memory and more is unnecessary. 
+
+11: a digital io pin can be switched into open collector mode and then 
+the pin can be pulled high by a resistor to 4v
+
+12: 
+Flash is from 0x1D000000 to 0x1F800000, max flash = 0x02800000 bytes
+Ram is from 0x00000000 to 0x1D000000, max ram = 0x1D000000 bytes
+
+13: in DEVCFG1: DEVICE CONFIGURATION WORD 1
+    FPBDIV (bits 12,13) set to 01 sets PBCLK to is SYSCLK / 2
+
+    FWDTEN (bit 23) set to 1 ennables the watchdog timer
+    WDTPS<4:0> bits 20-16 are watchdog timer postscale select bits
+    10100 = 1:1048576, max time interval
+
+    bit 2-0: oscillator selection bits 
+    set to 011 = primary oscillator (XT, HS, EC) with PLL
+    
+
+14: 5v regulator provides up to 1A of current V=ir so 5v/1A = 5 ohms
+
+15: 3.3v - 9v, min is 3.3v because this is what the chip requires to run and the 
+regulator can't increase the voltage, max is 9v because the regulator will overheat at higher
+voltages
+
+16: leds connected from 3.3v to RF0 (pin 58) and RF1 (pin 59) and will be on when the pins are low
+buttons connected to GND on one side and RD7 (pin 55) and MCLR (pin 7) on the other side with a pull up resistor to 
+3.3v on the pins. 

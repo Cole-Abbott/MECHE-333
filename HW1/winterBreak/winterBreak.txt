@@ -1,0 +1,44 @@
+1. See Hello.c
+2. a pointer is a variable that stores the address of another variable, 
+a non-pointer variable is a variable that stores a value
+3. Interpreted code is code that is executed by an interpreter that runs in real 
+time to convert the code into instructions that the computer can understand (machine code).
+Compiled code is code that is converted into machine code by a compiler before 
+it is executed.
+
+4. a) 0x1E: 00011110, 030
+   b) 0x32: 00110010, 050
+   c) 0xFE: 11111110, 254
+   d) 0xC4: 11000100, 196
+
+6. 2^16 addresses * 8 bits per address = 524288 bits
+
+7. a) 107 b) 53 c) 61 d) 63
+
+8. unsigned char has a range of 0 to 255, short has range of -32768 to 32767, 
+double has range of -1.7e308 to 1.7e308\
+
+10. a signed int can represent negative numbers since the first bit is used to denote
+the sign. unsigned ints can not represent negative numbers but can represent larger 
+numbers since the first bit is not used to denote the sign.
+
+11. a) A char only uses 1 byte of memory, while an int uses 4 bytes of memory.
+this means that using chars for integer math can be faster and use less memory than
+using ints, but it can also cause problems if the number is too large to fit in a char.
+ie, greater than 255.
+b) for floating point math, floats use 4 bytes of memory, while doubles use 8 bytes, 
+so floats will use less memory while doubles will be more accurate.
+c) for integer math, chars will store integers exaxtly, and float will not, and will
+introduce rounding errors, but can represent a larger range of values
+
+16. A pointer is most similar to a long int since it occupies 8 bytes of memory, and stores
+an exact integer value.
+
+17. 
+            // (a) the initial conditions, all memory contents unknown
+kp = &i;    // (b) 0xB8(kp): 0xB0, other memory contents unknown
+j = *kp;    // (c) 0xB8(kp): 0xB0, other memory contents unknown
+i = 0xAE;   // (d) 0xB8(kp): 0xB0, 0xB0..0xB3(i): 0xAE000000, other memory contents unknown
+np = kp;    // (e) 0xB8(kp): 0xB0, 0xB0..0xB3(i): 0xAE000000, 0xB9(np): 0xB0, other memory contents unknown
+*np = 0x12; // (f) 0xB8(kp): 0xB0, 0xB0..0xB3(i): 0x12000000, 0xB9(np): 0xB0, other memory contents unknown
+j = *kp;    // (g) 0xB8(kp): 0xB0, 0xB0..0xB3(i): 0x12000000, 0xB9(np): 0xB0,  0xB4..0xB7(j): 0x12000000,

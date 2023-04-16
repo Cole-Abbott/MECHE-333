@@ -1,0 +1,7 @@
+24.1.2: R = 10k
+
+24.2.1: PR3 = 2400-1
+
+24.2.2 c) without the capacitor you can see the value of Vout moving up and down with the PWM signal
+this is because the voltage increases when the PWM is high and decreases when it is low. adding the capacitor
+forms a low pass filter that filters this out

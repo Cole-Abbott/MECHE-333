@@ -1,0 +1,48 @@
+motorPID Project 
+
+USED PINS: 
+by PIC: A: 0,2,4 B: 3,4,5 
+by project, B: 6,7,8,9,11,14
+Timers: 2,3,4
+
+read encoder
+    motor to pico
+        power
+        A: GP14
+        B: GP15
+    
+    pico to PIC
+        pico: UART0 TX  UART0 RX
+        PIC:  U2RX      U2TX
+            must config UART 2 onto reprogramable pins
+            use RPB 11 as RX, 14 as TX 
+
+
+read current
+    Sensor   PIC
+    SDA      SDA1 (RB9, pin 18)
+    SCL      SCL1 (RB8, pin 17)
+
+    put sensor vin-, vin+ in series with motor
+
+drive H bridge
+    PWM OC1 on RPB7
+        Timer 2
+    GPIO on RB6
+
+
+PID control current
+    5kHz
+    Timer 3
+
+PID control position
+    200Hz 
+    Timer 4
+
+store data, send to client
+switch modes
+
+
+on Client:
+    send commands
+    plot data
